@@ -1,20 +1,23 @@
 import { LinkBox, LinkOverlay, List, ListItem } from '@chakra-ui/layout'
 import Link from 'next/link'
+import { usePlaylist } from '../../hooks/usePlaylist'
 
-const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`)
+const Playlist = () => {
+  const { playlist } = usePlaylist()
 
-const Playlist = () => (
-  <List spacing={2}>
-    {playlists.map((playlist) => (
-      <ListItem paddingX="20px" key={playlist}>
-        <LinkBox>
-          <Link href="/" passHref>
-            <LinkOverlay>{playlist}</LinkOverlay>
-          </Link>
-        </LinkBox>
-      </ListItem>
-    ))}
-  </List>
-)
+  return (
+    <List spacing={2}>
+      {playlist.map((playlist) => (
+        <ListItem paddingX="20px" key={playlist.id}>
+          <LinkBox>
+            <Link href="/" passHref>
+              <LinkOverlay>{playlist.name}</LinkOverlay>
+            </Link>
+          </LinkBox>
+        </ListItem>
+      ))}
+    </List>
+  )
+}
 
 export default Playlist
